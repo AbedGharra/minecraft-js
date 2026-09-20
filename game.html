@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft JS | Game</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="game-page">
+  <header class="game-topbar">
+    <h1>MINECRAFT JS</h1>
+    <a href="index.html" class="menu-button">Main Menu</a>
+  </header>
+
+  <main class="game-layout">
+    <section class="world-panel" aria-label="Game world">
+      <div id="world" class="world"></div>
+    </section>
+
+    <aside class="sidebar">
+      <section class="tools-panel">
+        <h2>Tools</h2>
+
+        <div id="toolbar" class="toolbar">
+          <button type="button" class="tool-button"
+                  data-tool="axe" aria-pressed="false">
+            Axe
+          </button>
+
+          <button type="button" class="tool-button"
+                  data-tool="pickaxe" aria-pressed="false">
+            Pickaxe
+          </button>
+
+          <button type="button" class="tool-button"
+                  data-tool="shovel" aria-pressed="false">
+            Shovel
+          </button>
+        </div>
+      </section>
+
+      <section class="inventory-panel">
+        <h2>Inventory</h2>
+        <div id="inventory" class="inventory"></div>
+      </section>
+
+      <p id="game-message" role="status">
+        Select a tool to start collecting blocks.
+      </p>
+
+      <button type="button" id="reset-button" class="menu-button">
+        Reset World
+      </button>
+    </aside>
+  </main>
+</body>
+</html>
