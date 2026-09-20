@@ -132,3 +132,208 @@ instructions-panel ul {
   margin: 28px auto 0;
 }
 
+/* GAME PAGE */
+
+.game-page {
+  background-color: #202020;
+}
+
+/* Header */
+
+.game-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto 24px;
+}
+
+.game-topbar h1 {
+  margin: 0;
+  font-size: 32px;
+  text-shadow: 3px 3px #111;
+}
+
+/* World */
+
+.game-layout {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.world-panel {
+  min-width: 0;
+  overflow-x: auto;
+  border: 3px solid #111;
+  background-color: #78b7ef;
+}
+
+.world {
+  display: grid;
+  min-height: 600px;
+}
+
+/* Hotbar inside the world */
+
+.sidebar {
+  --slot-size: 48px;
+
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  width: max-content;
+  max-width: calc(100% - 24px);
+  margin: 0;
+  padding: 6px;
+
+  background-color: #555;
+  border: 3px solid #151515;
+  box-shadow: inset 2px 2px #aaa, inset -2px -2px #222;
+}
+
+/* Keep headings accessible without showing them */
+
+.sidebar h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Tool slots */
+
+.toolbar {
+  display: flex;
+  gap: 4px;
+}
+
+.tool-button {
+  flex-shrink: 0;
+  width: var(--slot-size);
+  height: var(--slot-size);
+  padding: 2px;
+
+  border: 2px solid #222;
+  background-color: #777;
+  box-shadow: inset 2px 2px #aaa, inset -2px -2px #444;
+
+  color: white;
+  font: inherit;
+  font-size: 9px;
+  text-shadow: 1px 1px #111;
+  cursor: pointer;
+}
+
+.tool-button:hover {
+  background-color: #8993b5;
+}
+
+.tool-button:focus-visible {
+  outline: 2px solid #ffff55;
+  outline-offset: 1px;
+}
+
+.tool-button.selected {
+  border-color: white;
+  background-color: #596444;
+  outline: 2px solid #ffff55;
+  outline-offset: 1px;
+}
+
+/* Inventory slots */
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(3, var(--slot-size));
+  gap: 4px;
+  min-height: var(--slot-size);
+}
+
+/* Temporary empty slots until JavaScript adds items */
+
+.inventory:empty {
+  width: calc(
+    var(--slot-size) + var(--slot-size) + var(--slot-size) + 8px
+  );
+
+  background: repeating-linear-gradient(
+    to right,
+    #292929 0,
+    #292929 var(--slot-size),
+    #777 var(--slot-size),
+    #777 calc(var(--slot-size) + 4px)
+  );
+}
+
+/* Message above the hotbar */
+
+#game-message {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min(360px, 80vw);
+  margin: 0;
+
+  color: white;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  text-shadow: 1px 1px #111;
+  pointer-events: none;
+}
+
+/* Reset at the top-right of the world */
+
+#reset-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+
+  width: auto;
+  margin: 0;
+  padding: 8px 12px;
+
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Smaller screens */
+
+@media (max-width: 480px) {
+  .game-topbar {
+    justify-content: center;
+  }
+
+  .sidebar {
+    --slot-size: 32px;
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .tool-button {
+    font-size: 7px;
+  }
+
+  #game-message {
+    font-size: 10px;
+  }
+}
