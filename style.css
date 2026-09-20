@@ -86,3 +86,49 @@ body {
   padding-top: 40px;
   font-size: 12px;
 }
+
+/* Instructions page */
+.instructions-panel {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px;
+  background-color: #242424;
+  border: 3px solid #111;
+  box-shadow: inset 2px 2px #555, inset -2px -2px #111;
+}
+
+.instructions-panel h1 {
+  margin-top: 0;
+  color: #ffff55;
+  text-align: center;
+  text-shadow: 2px 2px #111;
+}
+
+.instructions-panel section {
+  margin: 20px 0;
+  padding: 18px;
+  background-color: #303030;
+  border: 2px solid #171717;
+}
+
+.instructions-panel h2 {
+  margin-top: 0;
+  color: #ffff55;
+  font-size: 20px;
+}
+
+.instructions-panel p,
+.instructions-panel li {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+instructions-panel ul {
+  padding-left: 24px;
+}
+
+.instructions-panel .main-menu {
+  margin: 28px auto 0;
+}
+
