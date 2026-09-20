@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px;
+  background-color: #35452e;
+  color: white;
+  font-family: "Courier New", monospace;
+}
+
+/* Main page layout */
+.menu-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.landing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+/* Title */
+.game-header {
+  text-align: center;
+}
+
+.game-title {
+  margin: 0;
+  font-size: clamp(36px, 8vw, 90px);
+  color: #d5d5d5;
+  text-shadow: 3px 3px #111, 6px 6px #555;
+}
+
+.splash-text {
+  color: #ffff55;
+  font-weight: bold;
+  text-shadow: 2px 2px #222;
+  transform: rotate(-8deg);
+}
+
+/* Menu buttons */
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.menu-button {
+  display: block;
+  padding: 14px 20px;
+  border: 2px solid #111;
+  background-color: #777;
+  box-shadow: inset 2px 2px #aaa, inset -2px -2px #444;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 2px 2px #333;
+}
+
+.menu-button:hover {
+  background-color: #8993b5;
+  color: #ffffa0;
+}
+
+.menu-button:focus-visible {
+  outline: 3px solid #ffff55;
+  outline-offset: 4px;
+}
+
+/* Footer */
+.landing-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 40px;
+  font-size: 12px;
+}
