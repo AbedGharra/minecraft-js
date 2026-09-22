@@ -390,3 +390,22 @@ instructions-panel ul {
   outline: 3px solid yellow;
   outline-offset: -3px;
 }
+
+.inventory-item {
+  width: var(--slot-size);
+  height: var(--slot-size);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2px;
+  border: 2px solid #222;
+  background-color: #777;
+  box-shadow: inset 2px 2px #aaa, inset -2px -2px #444;
+
+  color: white;
+  font-size: 10px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}

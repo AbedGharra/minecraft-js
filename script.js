@@ -51,8 +51,29 @@ const Game = {
         });
     },
 
+    renderInventory() {
+        const inventoryElement = document.querySelector("#inventory");
+
+        inventoryElement.innerHTML = "";
+
+        for (const tileType in this.inventory) {
+            const count = this.inventory[tileType];
+
+            if (count === 0) {
+            continue;
+            }
+
+            const item = document.createElement("div");
+            item.classList.add("inventory-item");
+            item.textContent = `${tileType}: ${count}`;
+
+            inventoryElement.appendChild(item);
+        }
+    },
+
     addToInventory(tileType) {
         this.inventory[tileType]++;
+        this.renderInventory();
     },
 
     clickTile(row, col) {
@@ -129,3 +150,4 @@ const Game = {
 
 Game.renderWorld();
 Game.setupTools();
+Game.renderInventory();
