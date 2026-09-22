@@ -2,20 +2,28 @@ const Game = {
   // 0 = air, 1 = grass, 2 = dirt
   // 3 = rock, 4 = wood, 5 = leaves
 
-selectedTool: null,
+    selectedTool: null,
 
-  world: [
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 5, 5, 5, 0, 0, 0, 0],
-    [0, 5, 4, 5, 0, 0, 0, 0],
-    [0, 0, 4, 0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1, 1],
-    [2, 2, 2, 2, 2, 2, 2, 2],
-    [2, 2, 3, 3, 2, 2, 3, 2],
-    [3, 3, 3, 3, 3, 3, 3, 3]
-  ],
+    inventory: {
+        grass: 0,
+        dirt: 0,
+        rock: 0,
+        wood: 0,
+        leaves: 0
+    },
 
-  tileTypes: ["air", "grass", "dirt", "rock", "wood", "leaves"],
+    world: [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 5, 5, 5, 0, 0, 0, 0],
+        [0, 5, 4, 5, 0, 0, 0, 0],
+        [0, 0, 4, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [2, 2, 2, 2, 2, 2, 2, 2],
+        [2, 2, 3, 3, 2, 2, 3, 2],
+        [3, 3, 3, 3, 3, 3, 3, 3]
+    ],
+
+    tileTypes: ["air", "grass", "dirt", "rock", "wood", "leaves"],
 
     selectTool(toolName){
         this.selectedTool = toolName;
@@ -41,6 +49,10 @@ selectedTool: null,
                 this.selectTool(button.dataset.tool);
             });
         });
+    },
+
+    addToInventory(tileType) {
+        this.inventory[tileType]++;
     },
 
     clickTile(row, col) {
@@ -70,10 +82,13 @@ selectedTool: null,
             return;
         }
 
+        this.addToInventory(tileType);
+
         this.world[row][col] = 0;
         this.renderWorld();
 
-        message.textContent = `Removed: ${tileType}`;
+        message.textContent =
+            `Collected ${tileType}. Total: ${this.inventory[tileType]}`;
     },
 
   
