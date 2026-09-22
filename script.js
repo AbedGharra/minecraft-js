@@ -43,6 +43,39 @@ selectedTool: null,
         });
     },
 
+    clickTile(row, col) {
+        const tileNumber = this.world[row][col];
+        const tileType = this.tileTypes[tileNumber];
+        const message = document.querySelector("#game-message");
+
+        if (this.selectedTool === null) {
+            message.textContent = "Select a tool first.";
+            return;
+        }
+
+        if (tileType === "air") {
+            return;
+        }
+
+        const correctTools = {
+            grass: "shovel",
+            dirt: "shovel",
+            rock: "pickaxe",
+            wood: "axe",
+            leaves: "axe"
+        };
+
+        if (this.selectedTool !== correctTools[tileType]) {
+            message.textContent = "Wrong tool for this block.";
+            return;
+        }
+
+        this.world[row][col] = 0;
+        this.renderWorld();
+
+        message.textContent = `Removed: ${tileType}`;
+    },
+
   
 
     renderWorld() {
@@ -67,6 +100,10 @@ selectedTool: null,
                     "aria-label",
                     `${tileType}, row ${row + 1}, column ${col + 1}`
                 );
+
+                tile.addEventListener("click", () => {
+                    this.clickTile(row, col);
+                });
 
                 worldElement.appendChild(tile);
             }
