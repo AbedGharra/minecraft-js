@@ -2,6 +2,8 @@ const Game = {
   // 0 = air, 1 = grass, 2 = dirt
   // 3 = rock, 4 = wood, 5 = leaves
 
+selectedTool: null,
+
   world: [
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 5, 5, 5, 0, 0, 0, 0],
@@ -14,6 +16,34 @@ const Game = {
   ],
 
   tileTypes: ["air", "grass", "dirt", "rock", "wood", "leaves"],
+
+    selectTool(toolName){
+        this.selectedTool = toolName;
+
+        const buttons =document.querySelectorAll(".tool-button");
+
+        buttons.forEach((button) => {
+            const isSelected = button.dataset.tool === toolName;
+
+            button.classList.toggle("selected", isSelected);
+            button.setAttribute("aria-pressed", String(isSelected));
+        });
+
+        document.querySelector("#game-message").textContent =
+            `Selected tool: ${toolName}`;
+    },
+
+    setupTools() {
+        const buttons = document.querySelectorAll(".tool-button");
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                this.selectTool(button.dataset.tool);
+            });
+        });
+    },
+
+  
 
     renderWorld() {
         const worldElement = document.querySelector("#world");
@@ -46,3 +76,4 @@ const Game = {
 };
 
 Game.renderWorld();
+Game.setupTools();
