@@ -159,6 +159,12 @@ const Game = {
 
     clickTile(row, col) {
 
+        if (!this.isWithinReach(row, col)) {
+            document.querySelector("#game-message").textContent =
+                "Move closer to this block.";
+            return;
+        }
+
         if (this.selectedBlock !== null) {
             this.placeFromInventory(row, col);
             return;
@@ -199,6 +205,13 @@ const Game = {
             `Collected ${tileType}. Total: ${this.inventory[tileType]}`;
 
         
+    },
+
+    isWithinReach(row, col) {
+        const rowDistance = Math.abs(row - this.player.row);
+        const colDistance = Math.abs(col - this.player.col);
+
+        return rowDistance <= 2 && colDistance <= 2;
     },
 
     resetWorld() {
@@ -274,6 +287,20 @@ const Game = {
         });
     },
 
+    startGravity() {
+        setInterval(() => {
+            const nextRow = this.player.row + 1;
+
+            if (nextRow >= this.world.length) return;
+
+            // Fall if air
+            if (this.world[nextRow][this.player.col] === 0) {
+                this.player.row = nextRow;
+                this.renderWorld();
+            }
+        }, 150);
+    },
+
   
 
     renderWorld() {
@@ -319,3 +346,4 @@ Game.setupTools();
 Game.renderInventory();
 Game.setupReset();
 Game.setupPlayerControls();
+Game.startGravity();
