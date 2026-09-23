@@ -409,3 +409,19 @@ instructions-panel ul {
   text-align: center;
   overflow-wrap: anywhere;
 }
+
+.inventory-item {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.inventory-item.selected {
+  border-color: white;
+  outline: 2px solid #ffff55;
+  outline-offset: 1px;
+}
+
+.inventory-item:focus-visible {
+  outline: 2px solid #ffff55;
+  outline-offset: 1px;
+}

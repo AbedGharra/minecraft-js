@@ -3,6 +3,7 @@ const Game = {
   // 3 = rock, 4 = wood, 5 = leaves
 
     selectedTool: null,
+    selectedBlock: null,
 
     inventory: {
         grass: 0,
@@ -25,10 +26,12 @@ const Game = {
 
     tileTypes: ["air", "grass", "dirt", "rock", "wood", "leaves"],
 
-    selectTool(toolName){
+    selectTool(toolName) {
         this.selectedTool = toolName;
+        this.selectedBlock = null;
+        this.renderInventory();
 
-        const buttons =document.querySelectorAll(".tool-button");
+        const buttons = document.querySelectorAll(".tool-button");
 
         buttons.forEach((button) => {
             const isSelected = button.dataset.tool === toolName;
@@ -51,6 +54,25 @@ const Game = {
         });
     },
 
+    selectBlock(tileType) {
+        if (this.inventory[tileType] <= 0) {
+            return;
+        }
+
+        this.selectedBlock = tileType;
+        this.selectedTool = null;
+
+        document.querySelectorAll(".tool-button").forEach((button) => {
+            button.classList.remove("selected");
+            button.setAttribute("aria-pressed", "false");
+        });
+
+        this.renderInventory();
+
+        document.querySelector("#game-message").textContent =
+            `Selected block: ${tileType}`;
+    },
+
     renderInventory() {
         const inventoryElement = document.querySelector("#inventory");
 
@@ -60,12 +82,22 @@ const Game = {
             const count = this.inventory[tileType];
 
             if (count === 0) {
-            continue;
+                continue;
             }
 
-            const item = document.createElement("div");
+            const item = document.createElement("button");
+            item.type = "button";
             item.classList.add("inventory-item");
             item.textContent = `${tileType}: ${count}`;
+
+            const isSelected = this.selectedBlock === tileType;
+
+            item.classList.toggle("selected", isSelected);
+            item.setAttribute("aria-pressed", String(isSelected));
+
+            item.addEventListener("click", () => {
+                this.selectBlock(tileType);
+            });
 
             inventoryElement.appendChild(item);
         }
