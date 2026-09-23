@@ -171,9 +171,9 @@ body {
 
 .world {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  max-width: 600px;
-  margin: 0 auto;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  min-width: 640px;
+  width: 100%;
 }
 
 
