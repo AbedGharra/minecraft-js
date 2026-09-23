@@ -108,7 +108,41 @@ const Game = {
         this.renderInventory();
     },
 
+    placeFromInventory(row, col) {
+        const blockType = this.selectedBlock;
+        const message = document.querySelector("#game-message");
+
+        if (blockType === null || this.inventory[blockType] <= 0) {
+            return;
+        }
+
+        if (this.world[row][col] !== 0) {
+            message.textContent = "Choose an empty space.";
+            return;
+        }
+
+        this.world[row][col] = this.tileTypes.indexOf(blockType);
+
+        this.inventory[blockType]--;
+
+        if (this.inventory[blockType] === 0) {
+            this.selectedBlock = null;
+        }
+
+        this.renderWorld();
+        this.renderInventory();
+
+        message.textContent =
+            `Placed ${blockType}. Remaining: ${this.inventory[blockType]}`;
+    },
+
     clickTile(row, col) {
+        
+        if (this.selectedBlock !== null) {
+            this.placeFromInventory(row, col);
+            return;
+        }
+
         const tileNumber = this.world[row][col];
         const tileType = this.tileTypes[tileNumber];
         const message = document.querySelector("#game-message");
@@ -142,6 +176,8 @@ const Game = {
 
         message.textContent =
             `Collected ${tileType}. Total: ${this.inventory[tileType]}`;
+
+        
     },
 
   
