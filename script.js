@@ -7,6 +7,8 @@ const Game = {
     selectedTool: null,
     selectedBlock: null,
 
+    jumpSteps: 0,
+
     player: {
         row: 3,
         col: 6
@@ -229,6 +231,7 @@ const Game = {
             button.setAttribute("aria-pressed", "false");
         });
 
+        this.jumpSteps = 0;
         this.player.row = 3;
         this.player.col = 6;    
 
@@ -261,15 +264,35 @@ const Game = {
         document.addEventListener("keydown", (event) => {
             let nextCol = this.player.col;
 
+            if (event.code === "Space" || event.code === "ArrowUp" || event.code === "KeyW") {
+                event.preventDefault();
+
+                const rowBelow = this.player.row + 1;
+                const isOnGround =
+                    rowBelow >= this.world.length ||
+                    this.world[rowBelow][this.player.col] !== 0;
+
+                const rowAbove = this.player.row - 1;
+                const hasRoomAbove =
+                    rowAbove >= 0 &&
+                    this.world[rowAbove][this.player.col] === 0;
+
+                if (isOnGround && hasRoomAbove) {
+                    this.jumpSteps = 1;
+                }
+
+                return;
+            }
+
             if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
-            nextCol--;
-            } else if (
-            event.key === "ArrowRight" ||
-            event.key.toLowerCase() === "d"
-            ) {
-            nextCol++;
-            } else {
-            return;
+                    nextCol--;
+                } else if (
+                    event.key === "ArrowRight" ||
+                    event.key.toLowerCase() === "d"
+                ) {
+                    nextCol++;
+                } else {
+                    return;
             }
 
             event.preventDefault();
@@ -289,14 +312,27 @@ const Game = {
 
     startGravity() {
         setInterval(() => {
-            const nextRow = this.player.row + 1;
+            if (this.jumpSteps > 0){
+                const rowAbove = this.player.row - 1;
 
-            if (nextRow >= this.world.length) return;
+                if (rowAbove >= 0 && this.world[rowAbove][this.player.col] === 0) {
+                    this.player.row = rowAbove;
+                    this.jumpSteps--;
+                    this.renderWorld();
+                    return;
+                }
+
+                this.jumpSteps = 0;
+            }
+            
+            const rowBelow = this.player.row + 1;
 
             // Fall if air
-            if (this.world[nextRow][this.player.col] === 0) {
-                this.player.row = nextRow;
-                this.renderWorld();
+            if (rowBelow < this.world.length &&
+                this.world[rowBelow][this.player.col] === 0
+            ) {
+                this.player.row = rowBelow;
+                this.renderWorld()
             }
         }, 150);
     },
