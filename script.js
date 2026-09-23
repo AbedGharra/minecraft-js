@@ -90,7 +90,21 @@ const Game = {
             const item = document.createElement("button");
             item.type = "button";
             item.classList.add("inventory-item");
-            item.textContent = `${tileType}: ${count}`;
+            
+            const preview = document.createElement("span");
+            preview.classList.add("block-preview" , `tile-${tileType}`);
+            preview.setAttribute("aria-hidden", "true");
+
+            const quantity = document.createElement("span");
+            quantity.classList.add("inventory-count");
+            quantity.textContent = count;
+
+            item.appendChild(preview);
+            item.appendChild(quantity);
+
+            item.setAttribute("aria-label", `${tileType}: ${count}`);
+            item.title = `${tileType}: ${count}`;
+
 
             const isSelected = this.selectedBlock === tileType;
 
