@@ -2,6 +2,8 @@ const Game = {
   // 0 = air, 1 = grass, 2 = dirt
   // 3 = rock, 4 = wood, 5 = leaves
 
+    initialWorld: [],
+
     selectedTool: null,
     selectedBlock: null,
 
@@ -137,7 +139,7 @@ const Game = {
     },
 
     clickTile(row, col) {
-        
+
         if (this.selectedBlock !== null) {
             this.placeFromInventory(row, col);
             return;
@@ -180,6 +182,34 @@ const Game = {
         
     },
 
+    resetWorld() {
+        this.world = this.initialWorld.map((row) => [...row]);
+
+        for (const tileType in this.inventory) {
+            this.inventory[tileType] = 0;
+        }
+
+        this.selectedTool = null;
+        this.selectedBlock = null;
+
+        document.querySelectorAll(".tool-button").forEach((button) => {
+            button.classList.remove("selected");
+            button.setAttribute("aria-pressed", "false");
+        });
+
+        this.renderWorld();
+        this.renderInventory();
+
+        document.querySelector("#game-message").textContent =
+            "World reset. Select a tool to start.";
+    },
+
+    setupReset() {
+        document.querySelector("#reset-button").addEventListener("click", () => {
+            this.resetWorld();
+        });
+    },
+
   
 
     renderWorld() {
@@ -216,6 +246,9 @@ const Game = {
 
 };
 
+Game.initialWorld = Game.world.map((row) => [...row]);
+
 Game.renderWorld();
 Game.setupTools();
 Game.renderInventory();
+Game.setupReset();
