@@ -7,6 +7,11 @@ const Game = {
     selectedTool: null,
     selectedBlock: null,
 
+    player: {
+        row: 3,
+        col: 6
+    },
+
     inventory: {
         grass: 0,
         dirt: 0,
@@ -211,6 +216,9 @@ const Game = {
             button.setAttribute("aria-pressed", "false");
         });
 
+        this.player.row = 3;
+        this.player.col = 6;    
+
         this.renderWorld();
         this.renderInventory();
 
@@ -221,6 +229,48 @@ const Game = {
     setupReset() {
         document.querySelector("#reset-button").addEventListener("click", () => {
             this.resetWorld();
+        });
+    },
+
+
+    renderPlayer() {
+        const playerElement = document.createElement("div");
+        playerElement.className = "player";
+        playerElement.setAttribute("aria-label", "Player");
+
+        playerElement.style.setProperty("--player-row", this.player.row);
+        playerElement.style.setProperty("--player-col", this.player.col);
+
+        document.querySelector("#world").appendChild(playerElement);
+    },
+
+    setupPlayerControls() {
+        document.addEventListener("keydown", (event) => {
+            let nextCol = this.player.col;
+
+            if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
+            nextCol--;
+            } else if (
+            event.key === "ArrowRight" ||
+            event.key.toLowerCase() === "d"
+            ) {
+            nextCol++;
+            } else {
+            return;
+            }
+
+            event.preventDefault();
+
+            if (
+            nextCol < 0 ||
+            nextCol >= this.world[this.player.row].length ||
+            this.world[this.player.row][nextCol] !== 0
+            ) {
+            return;
+            }
+
+            this.player.col = nextCol;
+            this.renderWorld();
         });
     },
 
@@ -256,6 +306,8 @@ const Game = {
                 worldElement.appendChild(tile);
             }
         }
+
+        this.renderPlayer();
     }
 
 };
@@ -266,3 +318,4 @@ Game.renderWorld();
 Game.setupTools();
 Game.renderInventory();
 Game.setupReset();
+Game.setupPlayerControls();
