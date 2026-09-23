@@ -11,7 +11,7 @@ body {
   font-family: "Courier New", monospace;
 }
 
-/* Main page layout */
+/* Main page */
 .menu-page {
   display: flex;
   flex-direction: column;
@@ -77,7 +77,7 @@ body {
   outline-offset: 4px;
 }
 
-/* Footer */
+
 .landing-footer {
   display: flex;
   justify-content: space-between;
@@ -124,7 +124,7 @@ body {
   line-height: 1.7;
 }
 
-instructions-panel ul {
+.instructions-panel ul {
   padding-left: 24px;
 }
 
@@ -137,8 +137,6 @@ instructions-panel ul {
 .game-page {
   background-color: #202020;
 }
-
-/* Header */
 
 .game-topbar {
   display: flex;
@@ -178,7 +176,6 @@ instructions-panel ul {
   margin: 0 auto;
 }
 
-/* Hotbar inside the world */
 
 .sidebar {
   --slot-size: 48px;
@@ -204,7 +201,6 @@ instructions-panel ul {
   box-shadow: inset 2px 2px #aaa, inset -2px -2px #222;
 }
 
-/* Keep headings accessible without showing them */
 
 .sidebar h2 {
   position: absolute;
@@ -260,13 +256,15 @@ instructions-panel ul {
 /* Inventory slots */
 
 .inventory {
-  display: grid;
-  grid-template-columns: repeat(3, var(--slot-size));
+  display: flex;
+  flex-wrap: nowrap;
   gap: 4px;
+  min-width: 0;
   min-height: var(--slot-size);
+  overflow-x: auto;
+  padding: 3px;
 }
 
-/* Temporary empty slots until JavaScript adds items */
 
 .inventory:empty {
   width: calc(
@@ -392,14 +390,16 @@ instructions-panel ul {
 }
 
 .inventory-item {
-  width: var(--slot-size);
-  height: var(--slot-size);
-
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 
-  padding: 2px;
+  width: var(--slot-size);
+  height: var(--slot-size);
+  padding: 5px;
+
   border: 2px solid #222;
   background-color: #777;
   box-shadow: inset 2px 2px #aaa, inset -2px -2px #444;
@@ -408,11 +408,16 @@ instructions-panel ul {
   font-size: 10px;
   text-align: center;
   overflow-wrap: anywhere;
-}
-
-.inventory-item {
   font-family: inherit;
   cursor: pointer;
+}
+
+.inventory-panel {
+  min-width: 0;
+}
+
+.tools-panel {
+  flex-shrink: 0;
 }
 
 .inventory-item.selected {
@@ -424,11 +429,6 @@ instructions-panel ul {
 .inventory-item:focus-visible {
   outline: 2px solid #ffff55;
   outline-offset: 1px;
-}
-
-.inventory-item {
-  position: relative;
-  padding: 5px;
 }
 
 .block-preview {
