@@ -157,9 +157,12 @@ body {
 /* World */
 
 .game-layout {
+  display: grid;
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 
 .world-panel {
@@ -181,20 +184,15 @@ body {
 .sidebar {
   --slot-size: 48px;
 
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 6px;
 
-  width: max-content;
-  max-width: calc(100% - 24px);
-  margin: 0;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 6px;
 
   background-color: #555;
@@ -284,12 +282,8 @@ body {
 /* Message above the hotbar */
 
 #game-message {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%);
-
-  width: min(360px, 80vw);
+  order: 1;
+  flex-basis: 100%;
   margin: 0;
 
   color: white;
