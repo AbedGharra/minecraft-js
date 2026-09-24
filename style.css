@@ -352,27 +352,33 @@ body {
 }
 
 .tile-grass {
-  background: linear-gradient(
-    to bottom,
-    #5f9e35 25%,
-    #855333 25%
-  );
+  background-image: url("assets/grass.png");
+  background-size: 100% 100%;
+  image-rendering: pixelated;
 }
 
 .tile-dirt {
-  background-color: #855333;
+  background-image: url("assets/dirt.png");
+  background-size: 100% 100%;
+  image-rendering: pixelated;
 }
 
 .tile-rock {
-  background-color: #777;
+  background-image: url("assets/stone.png");
+  background-size: 100% 100%;
+  image-rendering: pixelated;
 }
 
 .tile-wood {
-  background-color: #694322;
+  background-image: url("assets/wood.png");
+  background-size: 100% 100%;
+  image-rendering: pixelated;
 }
 
 .tile-leaves {
-  background-color: #367b2c;
+  background-image: url("assets/leaves.png");
+  background-size: 100% 100%;
+  image-rendering: pixelated;
 }
 
 .tile:hover {
