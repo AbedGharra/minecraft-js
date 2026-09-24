@@ -144,6 +144,11 @@ const Game = {
             return;
         }
 
+        if (row === this.player.row && col === this.player.col) {
+            message.textContent = "You cannot place a block on the player.";
+            return;
+        }
+
         this.world[row][col] = this.tileTypes.indexOf(blockType);
 
         this.inventory[blockType]--;
