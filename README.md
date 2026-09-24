@@ -2,6 +2,10 @@
 
 A 2D Minecraft-inspired browser game made with HTML, CSS, and JavaScript.
 
+## Play
+
+[Play Minecraft JS](https://abedgharra.github.io/minecraft-js/)
+
 ## About the app
 
 I built a small block world where the player can move, jump, collect blocks, and place them somewhere else. Each type of block needs the correct tool to collect it. Collected blocks appear in the inventory, where the player can select them for placement.
